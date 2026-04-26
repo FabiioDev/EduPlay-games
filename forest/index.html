@@ -8,19 +8,29 @@
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="forest-style.css" />
   </head>
   <body class="game-body">
+    <nav class="top-nav">
+      <a href="../index.html" class="btn-back">
+        <span class="material-symbols-outlined">arrow_back</span> Biblioteca
+      </a>
+    </nav>
+
     <main class="game-surface">
       <header>
-        <h1 class="display-lg">El Bosque de los Sonidos</h1>
+        <h1 class="display-lg">Bosque de Sonidos</h1>
         <p class="headline-md instruction-text" id="status-text">
-          Elige tu nivel y a jugar
+          Elige tu nivel para comenzar
         </p>
       </header>
 
-      <div class="filters-container game-setup">
+      <div class="filters-container game-setup" id="setup-area">
         <span class="filter-label">Dificultad:</span>
         <button
           class="filter-btn difficulty-filter active-gold"
@@ -36,7 +46,7 @@
         </button>
       </div>
 
-      <div class="animal-grid">
+      <div class="animal-grid hidden" id="game-board">
         <button
           class="animal-pad"
           data-id="0"
@@ -61,8 +71,34 @@
 
       <div class="controls">
         <button id="start-btn" class="btn btn-primary title-lg">
-          ¡Empezar!
+          ¡Empezar Juego!
         </button>
+
+        <div
+          id="post-level-actions"
+          class="hidden"
+          style="
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+          "
+        >
+          <button
+            id="continue-btn"
+            class="btn btn-success title-lg"
+            style="margin-bottom: 0"
+          >
+            Continuar
+          </button>
+          <button
+            id="restart-menu-btn"
+            class="btn filter-btn title-lg"
+            style="background: var(--surface-border)"
+          >
+            Cambiar Nivel
+          </button>
+        </div>
       </div>
     </main>
 
