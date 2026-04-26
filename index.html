@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduPlay</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">EduPlay</div>
+      <nav class="nav-links">
+        <a href="#" class="active">Jugar</a>
+        <a href="#">Biblioteca</a>
+        <a href="#">Mi Progreso</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn">
+          <span class="material-symbols-outlined">emoji_events</span>
+        </button>
+        <button class="icon-btn">
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+        <div class="avatar">
+          <img
+            src="https://api.dicebear.com/7.x/bottts/svg?seed=MindMinds"
+            alt="User Avatar"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Bienvenido a <br /><span>EduPlay</span></h1>
+          <p>
+            Tu patio de juegos digital para diversión que estimula el cerebro!
+          </p>
+          <button class="btn btn-primary">
+            <span class="material-symbols-outlined">play_arrow</span> Empezar a
+            Jugar
+          </button>
+        </div>
+        <div class="hero-image-card">
+          <img
+            src="https://api.dicebear.com/7.x/shapes/svg?seed=mascot"
+            alt="Mascot"
+            class="mascot"
+          />
+        </div>
+      </section>
+
+      <!-- <section class="daily-challenge">
+        <div class="section-header">
+          <h2>Daily Challenge</h2>
+          <span class="badge timer-badge"
+            ><span class="material-symbols-outlined">timer</span> 24h Left</span
+          >
+        </div>
+
+        <div class="challenge-cards">
+          <div class="card challenge-main-card">
+            <div class="challenge-img-placeholder"></div>
+            <div class="challenge-info">
+              <span class="badge logic-badge">Logic Legends</span>
+              <h3>The Grand Pattern Mystery</h3>
+              <p>Solve the sequence to unlock the golden chest!</p>
+              <button class="btn btn-success">Play Now</button>
+            </div>
+          </div>
+
+          <div class="card reward-card">
+            <div class="reward-icon">
+              <span class="material-symbols-outlined">star</span>
+            </div>
+            <h3>Reward</h3>
+            <p>Earn 500 Star Coins & a Mystery Badge</p>
+          </div>
+        </div>
+      </section> -->
+
+      <section class="game-library">
+        <div class="library-header">
+          <h2>Biblioteca de Juegos</h2>
+
+          <div class="filters-container">
+            <div class="filter-group">
+              <span class="filter-label">Edad:</span>
+              <button class="filter-btn age-filter">4-6</button>
+              <button class="filter-btn age-filter active-gold">7-10</button>
+            </div>
+
+            <div class="filter-group scrollable-filters">
+              <span class="filter-label">Habilidades:</span>
+              <button class="filter-btn skill-filter">Todas</button>
+              <button class="filter-btn skill-filter">Atención</button>
+              <button class="filter-btn skill-filter active-gold">
+                Memorización
+              </button>
+              <button class="filter-btn skill-filter">
+                Resolución de problemas
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="library-grid">
+          <article class="library-card">
+            <div class="card-img-container rotate-neg-1">
+              <div class="img-placeholder bg-blue-grad"></div>
+              <div class="icon-circle text-blue">
+                <span class="material-symbols-outlined">psychology</span>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>Memory Match</h3>
+              <p>Memory • Ages 7-10</p>
+            </div>
+          </article>
+
+          <article class="library-card featured">
+            <div class="card-img-container rotate-pos-1">
+              <div class="img-placeholder bg-green-grad"></div>
+              <div class="icon-circle text-green">
+                <span class="material-symbols-outlined">extension</span>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>Logic Builder</h3>
+              <p>Problem Solving • Ages 7-10</p>
+            </div>
+          </article>
+
+          <article class="library-card">
+            <div class="card-img-container rotate-neg-2">
+              <div class="img-placeholder bg-yellow-grad"></div>
+              <div class="icon-circle text-yellow">
+                <span class="material-symbols-outlined">visibility</span>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>Color Sort</h3>
+              <p>Attention • Ages 4-6</p>
+            </div>
+          </article>
+
+          <article class="library-card">
+            <div class="card-img-container rotate-pos-2">
+              <div class="img-placeholder bg-darkblue-grad"></div>
+              <div class="icon-circle text-darkblue">
+                <span class="material-symbols-outlined">memory</span>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>Pattern Quest</h3>
+              <p>Memory • Ages 7-10</p>
+            </div>
+          </article>
+
+          <article class="library-card">
+            <div class="card-img-container rotate-neg-1">
+              <div class="img-placeholder bg-red-grad"></div>
+              <div class="icon-circle text-red">
+                <span class="material-symbols-outlined">account_tree</span>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>Domino Dash</h3>
+              <p>Problem Solving • Ages 7-10</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
