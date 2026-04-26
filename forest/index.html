@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Bosque de los Sonidos</title>
+    <link rel="stylesheet" href="/forest/style.css" />
+  </head>
+  <body>
+    <main class="game-surface">
+      <header>
+        <h1 class="display-lg">El Bosque de los Sonidos</h1>
+        <p class="headline-md instruction-text" id="status-text">
+          Observa, escucha y repite
+        </p>
+      </header>
+
+      <div class="animal-grid">
+        <button class="animal-pad" data-id="0" style="--pad-color: #ffb74d">
+          🦊
+        </button>
+        <button class="animal-pad" data-id="1" style="--pad-color: #81c784">
+          🐸
+        </button>
+        <button class="animal-pad" data-id="2" style="--pad-color: #64b5f6">
+          🐦
+        </button>
+        <button class="animal-pad" data-id="3" style="--pad-color: #ba68c8">
+          🦉
+        </button>
+      </div>
+
+      <div class="controls">
+        <button id="start-btn" class="primary-btn title-lg">¡Jugar!</button>
+      </div>
+    </main>
+
+    <script src="/forest/script.js"></script>
+  </body>
+</html>
