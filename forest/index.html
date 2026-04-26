@@ -3,38 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>El Bosque de los Sonidos</title>
-    <link rel="stylesheet" href="/forest/style.css" />
+    <title>El Bosque de los Sonidos - EduPlay</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="forest-style.css" />
   </head>
-  <body>
+  <body class="game-body">
     <main class="game-surface">
       <header>
         <h1 class="display-lg">El Bosque de los Sonidos</h1>
         <p class="headline-md instruction-text" id="status-text">
-          Observa, escucha y repite
+          Elige tu nivel y a jugar
         </p>
       </header>
 
+      <div class="filters-container game-setup">
+        <span class="filter-label">Dificultad:</span>
+        <button
+          class="filter-btn difficulty-filter active-gold"
+          data-diff="facil"
+        >
+          Fácil
+        </button>
+        <button class="filter-btn difficulty-filter" data-diff="medio">
+          Medio
+        </button>
+        <button class="filter-btn difficulty-filter" data-diff="dificil">
+          Difícil
+        </button>
+      </div>
+
       <div class="animal-grid">
-        <button class="animal-pad" data-id="0" style="--pad-color: #ffb74d">
-          🦊
-        </button>
-        <button class="animal-pad" data-id="1" style="--pad-color: #81c784">
-          🐸
-        </button>
-        <button class="animal-pad" data-id="2" style="--pad-color: #64b5f6">
-          🐦
-        </button>
-        <button class="animal-pad" data-id="3" style="--pad-color: #ba68c8">
-          🦉
-        </button>
+        <button
+          class="animal-pad"
+          data-id="0"
+          style="--pad-color: #ffb74d"
+        ></button>
+        <button
+          class="animal-pad"
+          data-id="1"
+          style="--pad-color: #81c784"
+        ></button>
+        <button
+          class="animal-pad"
+          data-id="2"
+          style="--pad-color: #64b5f6"
+        ></button>
+        <button
+          class="animal-pad"
+          data-id="3"
+          style="--pad-color: #ba68c8"
+        ></button>
       </div>
 
       <div class="controls">
-        <button id="start-btn" class="primary-btn title-lg">¡Jugar!</button>
+        <button id="start-btn" class="btn btn-primary title-lg">
+          ¡Empezar!
+        </button>
       </div>
     </main>
 
-    <script src="/forest/script.js"></script>
+    <script src="game.js"></script>
   </body>
 </html>
