@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Información del Juego - EduPlay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="info-style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">EduPlay</div>
+      <nav class="nav-links">
+        <a href="index.html">Jugar</a>
+        <a href="#" class="active">Biblioteca</a>
+        <a href="#">Mi Progreso</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn">
+          <span class="material-symbols-outlined">emoji_events</span>
+        </button>
+        <button class="icon-btn">
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+        <div class="avatar">
+          <img
+            src="https://api.dicebear.com/7.x/bottts/svg?seed=MindMinds"
+            alt="User Avatar"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main class="container info-layout">
+      <a href="index.html" class="btn-back-link">
+        <span class="material-symbols-outlined">arrow_back</span> Volver a la
+        Biblioteca
+      </a>
+
+      <div class="split-card">
+        <div class="info-left">
+          <div class="info-header-area">
+            <div
+              class="icon-circle text-blue icon-large"
+              id="game-icon-container"
+            >
+              <span class="material-symbols-outlined" id="game-icon"
+                >music_note</span
+              >
+            </div>
+            <div>
+              <h1 id="game-title">Cargando...</h1>
+              <div class="badges-container" id="game-badges"></div>
+            </div>
+          </div>
+
+          <div class="info-section">
+            <h2>Descripción</h2>
+            <p id="game-desc">Cargando...</p>
+          </div>
+
+          <div class="info-section how-to-play">
+            <h2>¿Cómo se juega?</h2>
+            <p id="game-rules">Cargando...</p>
+          </div>
+
+          <div class="info-section">
+            <h2>Habilidades que entrenas 🧠</h2>
+            <ul class="skills-list" id="game-skills"></ul>
+          </div>
+        </div>
+
+        <div class="info-right">
+          <div class="game-preview-area">
+            <img
+              id="game-preview-img"
+              src="resources/planets/galaxy_game.png"
+              alt="Vista previa"
+              class="img-fluid"
+            />
+          </div>
+
+          <div class="action-footer">
+            <a href="#" id="play-btn" class="btn-play-massive">
+              <span class="material-symbols-outlined">sports_esports</span>
+              ¡JUGAR AHORA!
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="info.js"></script>
+  </body>
+</html>

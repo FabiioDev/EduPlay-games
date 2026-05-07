@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusText = document.getElementById('status-text');
   const difficultyBtns = document.querySelectorAll('.difficulty-filter');
   
-  // Nuevos contenedores de UI
   const setupArea = document.getElementById('setup-area');
   const gameBoard = document.getElementById('game-board');
   const postLevelActions = document.getElementById('post-level-actions');
@@ -108,21 +107,17 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(playMachineSequence, 800);
   }
 
-  // --- 4. Ajuste Dinámico de Dificultad (DDA) basado en Tiempo Total ---
+  // --- 4. Ajuste Dinámico de Dificultad (DDA) ---
   function evaluatePerformance() {
     const totalTimeTaken = Date.now() - turnStartTime;
-    // Calculamos un tiempo "objetivo" ideal basado en cuántas piezas tiene el patrón actual
-    // Ej: Para 3 piezas, esperamos que el niño tarde unos 4500ms (1.5 seg por pieza)
     const targetTime = gameSequence.length * 1500;
 
     if (currentDifficulty !== 'facil') {
       if (totalTimeTaken < targetTime * 0.7) { 
-        // ¡Lo hizo muy rápido en total!
         config.playbackSpeed = Math.max(200, config.playbackSpeed * 0.9);
         config.pauseSpeed = Math.max(100, config.pauseSpeed * 0.9);
       } 
       else if (totalTimeTaken > targetTime * 1.2) { 
-        // Tardó bastante en completar toda la secuencia
         config.playbackSpeed = Math.min(600, config.playbackSpeed * 1.1);
         config.pauseSpeed = Math.min(300, config.pauseSpeed * 1.1);
       }
@@ -131,14 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 5. Interacciones del Jugador ---
   function handlePlayerTouch(e) {
-    // PREVENCIÓN DE BUGS: preventDefault evita los ghost clicks en móviles.
     e.preventDefault();
     
-    // Bloqueos de seguridad: Evita toques extra simultáneos
     if (!isPlayerTurn) return;
     if (playerSequence.length >= gameSequence.length) return;
 
-    const padIndex = parseInt(e.currentTarget.dataset.id); // currentTarget es más seguro
+    const padIndex = parseInt(e.currentTarget.dataset.id);
     playerSequence.push(padIndex);
     animatePad(padIndex);
 
@@ -149,8 +142,11 @@ document.addEventListener('DOMContentLoaded', () => {
       statusText.textContent = "¡Uy! Patrón incorrecto 🌟";
       statusText.style.color = "var(--accent-red)";
       isPlayerTurn = false;
+      
+      // Solo mostramos los botones SI PIERDE
       postLevelActions.classList.remove('hidden');
-      continueBtn.classList.add('hidden'); // Ocultar continuar si perdió
+      continueBtn.classList.remove('hidden');
+      continueBtn.textContent = "Reintentar Ronda"; // Cambiamos texto
       return;
     }
 
@@ -162,21 +158,18 @@ document.addEventListener('DOMContentLoaded', () => {
       
       evaluatePerformance(); 
       
-      // En lugar de avanzar automáticamente, mostramos el menú de Continuar
+      // EL CAMBIO MAGISTRAL: Esperamos 1 segundo para que vea el mensaje y lanzamos la siguiente ronda solos
       setTimeout(() => {
-        postLevelActions.classList.remove('hidden');
-        continueBtn.classList.remove('hidden'); // Asegurar que esté visible al ganar
-      }, 500);
+        nextRound();
+      }, 1000);
     }
   }
 
   // --- Listeners de UI ---
   pads.forEach(pad => {
-    // pointerdown unifica ratón y táctil, se recomienda sobre click para juegos
     pad.addEventListener('pointerdown', handlePlayerTouch);
   });
 
-  // Botón Principal de Iniciar Juego
   startBtn.addEventListener('click', () => {
     setupArea.classList.add('hidden');
     startBtn.classList.add('hidden');
@@ -187,13 +180,15 @@ document.addEventListener('DOMContentLoaded', () => {
     nextRound();
   });
 
-  // Botón de Continuar (Siguiente Nivel)
+  // Botón de Reintentar (Si se equivocó)
   continueBtn.addEventListener('click', () => {
     postLevelActions.classList.add('hidden');
-    nextRound();
+    playerSequence = []; // Reseteamos sus toques
+    // Repetimos la secuencia de la máquina sin agregarle una nota nueva
+    setTimeout(playMachineSequence, 500);
   });
 
-  // Botón de Cambiar Nivel (Reset y Regresar a Setup)
+  // Botón de Cambiar Nivel (Reset total)
   restartMenuBtn.addEventListener('click', () => {
     postLevelActions.classList.add('hidden');
     gameBoard.classList.add('hidden');
@@ -204,10 +199,4 @@ document.addEventListener('DOMContentLoaded', () => {
     statusText.style.color = "var(--text-main)";
     gameSequence = [];
   });
-
 });
-
-
-//TODO: progresión de dificultad check-listo, bajada de dificultad not working
-// mejorar feedback visual tanto de errores como de aciertos, y feedback de animación cuando se toca el pad de cada animal
-// por ejemplo tenga más sombreado el pad activo

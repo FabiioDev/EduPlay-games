@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Torre de Hanoi - EduPlay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="hanoi-style.css" />
+  </head>
+  <body class="hanoi-body">
+    <nav class="top-nav">
+      <a href="../index.html" class="btn-back">
+        <span class="material-symbols-outlined">arrow_back</span> Biblioteca
+      </a>
+    </nav>
+
+    <main class="game-surface hanoi-surface">
+      <header class="hanoi-header">
+        <h1 class="hanoi-title">Torre de Hanoi</h1>
+        <p class="hanoi-subtitle" id="status-text">
+          Mueve todos los discos a la torre de la derecha
+        </p>
+      </header>
+
+      <!-- Stats Bar -->
+      <div class="stats-bar">
+        <div class="stat-chip">
+          <span class="material-symbols-outlined">stacks</span>
+          <span>Nivel <span id="level-display">1</span></span>
+        </div>
+        <div class="stat-chip highlight">
+          <span class="material-symbols-outlined">move_down</span>
+          <span>Movimientos: <span id="moves-display">0</span></span>
+        </div>
+        <div class="stat-chip">
+          <span class="material-symbols-outlined">star</span>
+          <span>Óptimo: <span id="optimal-display">-</span></span>
+        </div>
+      </div>
+
+      <!-- Game Area -->
+      <div class="hanoi-game-area" id="game-area">
+        <!-- Towers rendered by JS -->
+      </div>
+
+      <!-- Controls -->
+      <div class="hanoi-controls">
+        <button id="start-btn" class="btn hanoi-btn-primary">
+          <span class="material-symbols-outlined">play_arrow</span>
+          ¡Empezar!
+        </button>
+
+        <div id="post-level-actions" class="hidden post-actions">
+          <button id="continue-btn" class="btn hanoi-btn-success">
+            <span class="material-symbols-outlined">arrow_forward</span>
+            Siguiente Nivel
+          </button>
+          <button id="restart-btn" class="btn hanoi-btn-outline">
+            <span class="material-symbols-outlined">refresh</span>
+            Reintentar
+          </button>
+        </div>
+      </div>
+
+      <!-- Win message overlay -->
+      <div id="win-overlay" class="hidden win-overlay">
+        <div class="win-card">
+          <button id="win-close-btn" class="win-close-btn" aria-label="Cerrar">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+          <div class="win-emoji" id="win-emoji">🏆</div>
+          <h2 id="win-title">¡Nivel Completado!</h2>
+          <p id="win-message">Bien hecho</p>
+          <div class="win-stars" id="win-stars"></div>
+          <div class="win-actions">
+            <button id="win-continue-btn" class="btn hanoi-btn-success">
+              <span class="material-symbols-outlined">arrow_forward</span>
+              Siguiente Nivel
+            </button>
+            <button id="win-restart-btn" class="btn hanoi-btn-outline">
+              <span class="material-symbols-outlined">refresh</span>
+              Reintentar
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
