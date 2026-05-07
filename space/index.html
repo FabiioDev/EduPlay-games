@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parejas en el Espacio - EduPlay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="space-style.css" />
+</head>
+<body class="space-body">
+    <nav class="top-nav">
+        <a href="../index.html" class="btn-back">
+            <span class="material-symbols-outlined">arrow_back</span> Biblioteca
+        </a>
+    </nav>
+
+    <main class="game-surface space-surface">
+        <header>
+            <h1 class="display-lg text-glow">Parejas en el Espacio</h1>
+            <p class="headline-md instruction-text text-light" id="status-text">
+                Encuentra los planetas gemelos
+            </p>
+        </header>
+
+        <div class="filters-container game-setup" id="setup-area">
+            <span class="filter-label text-light">Dificultad Inicial:</span>
+            <button class="filter-btn difficulty-filter active-neon" data-diff="facil">Fácil (4 pares)</button>
+            <button class="filter-btn difficulty-filter" data-diff="medio">Medio (6 pares)</button>
+            <button class="filter-btn difficulty-filter" data-diff="dificil">Difícil (8 pares)</button>
+        </div>
+
+        <div class="cards-grid hidden" id="game-board">
+            </div>
+
+        <div class="controls">
+            <button id="start-btn" class="btn btn-primary title-lg btn-space">
+                ¡Despegar! 🚀
+            </button>
+
+            <div id="post-level-actions" class="hidden post-actions">
+                <button id="continue-btn" class="btn btn-success title-lg btn-space">
+                    Siguiente Nivel
+                </button>
+                <button id="restart-menu-btn" class="btn filter-btn title-lg btn-space-outline">
+                    Cambiar Dificultad
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="game.js"></script>
+</body>
+</html>

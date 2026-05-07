@@ -1,0 +1,209 @@
+/* Layout Principal */
+.info-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Botón de regresar tipo "Píldora" */
+.btn-back-link {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--primary-blue);
+    font-weight: 800;
+    font-size: 1rem;
+    background-color: #ffffff;
+    border: 2px solid var(--surface-border);
+    padding: 0.6rem 1.5rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 71, 179, 0.08);
+    margin-bottom: 2rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-back-link:hover {
+    color: var(--primary-light);
+    border-color: var(--primary-light);
+    transform: translateX(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 163, 255, 0.15);
+}
+
+/* Tarjeta Dividida */
+.split-card {
+    background-color: var(--surface-color);
+    border-radius: 2.5rem;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Proporción de columnas */
+    min-height: 600px;
+    overflow: hidden;
+}
+
+/* Columna Izquierda */
+.info-left {
+    padding: 3.5rem;
+}
+
+/* Columna Derecha: Panel de Acción */
+.info-right {
+    background-color: #f0f4f8; /* Un gris muy claro para diferenciar */
+    padding: 3.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empuja el footer hacia abajo */
+    border-left: 2px solid var(--surface-light);
+}
+
+/* Área de Imagen — fondo espacial para galaxy_game.png sin fondo */
+.game-preview-area {
+    width: 100%;
+    height: 350px; /* Un poco más alto para esta vista */
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #f0f4f8;
+}
+
+/* Estrellas decorativas en el fondo del preview */
+.game-preview-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 60px 60px, 30px 30px;
+    background-position: 0 0, 15px 15px;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.game-preview-area img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(200, 121, 255, 0.6));
+    position: relative;
+    z-index: 1;
+}
+
+/* Botón Gigante (Tu círculo azul) */
+.btn-play-massive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-blue));
+    color: white;
+    text-decoration: none;
+    padding: 1.5rem 2rem;
+    border-radius: 100px; /* Forma de píldora/círculo */
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(75, 164, 253, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-play-massive:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(75, 164, 253, 0.6);
+}
+
+.btn-play-massive span {
+    font-size: 2.2rem;
+}
+
+/* Estilos de Texto */
+.info-header-area {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+#game-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--primary-blue);
+}
+
+.info-section { margin-bottom: 2rem; }
+.info-section h2 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.8rem; color: var(--text-main); }
+.info-section p { color: var(--text-muted); line-height: 1.6; }
+
+.how-to-play {
+    background-color: #f8fafc;
+    border-left: 6px solid var(--accent-yellow);
+    padding: 1.5rem;
+    border-radius: 0 1rem 1rem 0;
+}
+
+.skills-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.skills-list li {
+    background: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid var(--surface-border);
+}
+
+/* Adaptación para móviles */
+@media (max-width: 900px) {
+    .split-card { grid-template-columns: 1fr; }
+    .info-right { min-height: auto; gap: 2rem; }
+}
+
+.game-preview-area.theme-space {
+    background: radial-gradient(ellipse at center, #1e053a 0%, #07000e 60%, #000000 100%);
+}
+/* Estrellas solo si es tema espacio */
+.game-preview-area.theme-space::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 60px 60px, 30px 30px;
+    opacity: 0.25;
+}
+
+.game-preview-area.theme-forest {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.game-preview-area.theme-hanoi {
+    background-color: #B2EBF2;
+}
+
+.game-img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+.theme-space .game-img {
+    filter: drop-shadow(0 0 25px rgba(200, 121, 255, 0.7));
+}
+
+.game-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,35 +64,6 @@
         </div>
       </section>
 
-      <!-- <section class="daily-challenge">
-        <div class="section-header">
-          <h2>Daily Challenge</h2>
-          <span class="badge timer-badge"
-            ><span class="material-symbols-outlined">timer</span> 24h Left</span
-          >
-        </div>
-
-        <div class="challenge-cards">
-          <div class="card challenge-main-card">
-            <div class="challenge-img-placeholder"></div>
-            <div class="challenge-info">
-              <span class="badge logic-badge">Logic Legends</span>
-              <h3>The Grand Pattern Mystery</h3>
-              <p>Solve the sequence to unlock the golden chest!</p>
-              <button class="btn btn-success">Play Now</button>
-            </div>
-          </div>
-
-          <div class="card reward-card">
-            <div class="reward-icon">
-              <span class="material-symbols-outlined">star</span>
-            </div>
-            <h3>Reward</h3>
-            <p>Earn 500 Star Coins & a Mystery Badge</p>
-          </div>
-        </div>
-      </section> -->
-
       <section class="game-library">
         <div class="library-header">
           <h2>Biblioteca de Juegos</h2>
@@ -100,18 +71,27 @@
           <div class="filters-container">
             <div class="filter-group">
               <span class="filter-label">Edad:</span>
-              <button class="filter-btn age-filter">4-6</button>
-              <button class="filter-btn age-filter active-gold">7-10</button>
+              <button class="filter-btn age-filter" data-age="4-6">4-6</button>
+              <button class="filter-btn age-filter" data-age="7-10">
+                7-10
+              </button>
             </div>
 
             <div class="filter-group scrollable-filters">
               <span class="filter-label">Habilidades:</span>
-              <button class="filter-btn skill-filter">Todas</button>
-              <button class="filter-btn skill-filter">Atención</button>
-              <button class="filter-btn skill-filter active-gold">
+              <button
+                class="filter-btn skill-filter active-gold"
+                data-skill="todas"
+              >
+                Todas
+              </button>
+              <button class="filter-btn skill-filter" data-skill="atencion">
+                Atención
+              </button>
+              <button class="filter-btn skill-filter" data-skill="memorizacion">
                 Memorización
               </button>
-              <button class="filter-btn skill-filter">
+              <button class="filter-btn skill-filter" data-skill="resolucion">
                 Resolución de problemas
               </button>
             </div>
@@ -120,12 +100,18 @@
 
         <div class="library-grid">
           <a
-            href="forest/index.html"
+            href="game-info.html?id=bosque"
             class="library-card"
+            data-age="4-6"
+            data-skill="memorizacion"
             style="text-decoration: none; color: inherit"
           >
-            <div class="card-img-container rotate-neg-1">
-              <div class="img-placeholder bg-green-grad"></div>
+            <div class="card-img-container theme-forest rotate-neg-1">
+              <img
+                src="resources/forest.png"
+                alt="El Bosque de los Sonidos"
+                class="game-img"
+              />
               <div class="icon-circle text-blue">
                 <span class="material-symbols-outlined">music_note</span>
               </div>
@@ -137,12 +123,18 @@
           </a>
 
           <a
-            href="#"
+            href="game-info.html?id=espacio"
             class="library-card featured"
+            data-age="4-6"
+            data-skill="atencion"
             style="text-decoration: none; color: inherit"
           >
-            <div class="card-img-container rotate-pos-1">
-              <div class="img-placeholder bg-darkblue-grad"></div>
+            <div class="card-img-container theme-space rotate-pos-1">
+              <img
+                src="resources/planets/galaxy_game.png"
+                alt="Parejas en el Espacio"
+                class="game-img"
+              />
               <div class="icon-circle text-green">
                 <span class="material-symbols-outlined">cognition</span>
               </div>
@@ -154,12 +146,18 @@
           </a>
 
           <a
-            href="#"
+            href="game-info.html?id=hanoi"
             class="library-card"
+            data-age="7-10"
+            data-skill="resolucion"
             style="text-decoration: none; color: inherit"
           >
-            <div class="card-img-container rotate-neg-2">
-              <div class="img-placeholder bg-red-grad"></div>
+            <div class="card-img-container theme-hanoi rotate-neg-2">
+              <img
+                src="resources/hanoi.png"
+                alt="La Torre de Hanoi"
+                class="game-img-cover"
+              />
               <div class="icon-circle text-yellow">
                 <span class="material-symbols-outlined">route</span>
               </div>
@@ -173,6 +171,8 @@
           <a
             href="#"
             class="library-card"
+            data-age="all"
+            data-skill="all"
             style="text-decoration: none; color: inherit"
           >
             <div class="card-img-container rotate-pos-2">
@@ -195,6 +195,8 @@
           <a
             href="#"
             class="library-card"
+            data-age="all"
+            data-skill="all"
             style="text-decoration: none; color: inherit"
           >
             <div class="card-img-container rotate-neg-1">

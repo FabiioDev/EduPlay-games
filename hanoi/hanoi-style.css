@@ -1,0 +1,582 @@
+/* ===== TORRE DE HANOI - ESTILOS ===== */
+
+/* Paleta y variables */
+:root {
+    --hanoi-bg: #1a1225;
+    --hanoi-surface: #231830;
+    --hanoi-border: rgba(255, 210, 0, 0.2);
+    --hanoi-gold: #FFD200;
+    --hanoi-gold-dark: #D48806;
+    --hanoi-gold-glow: rgba(255, 210, 0, 0.3);
+    --hanoi-accent: #FF7043;
+    --hanoi-accent2: #00D084;
+    --hanoi-text: #F5ECD7;
+    --hanoi-text-muted: #A89880;
+    --hanoi-pole: #8B7355;
+    --hanoi-pole-dark: #5C4A2A;
+    --hanoi-base: #5C4A2A;
+
+    /* Colores de discos (del más grande al más pequeño) */
+    --disk-1: #E53935; /* Rojo */
+    --disk-2: #FB8C00; /* Naranja */
+    --disk-3: #FDD835; /* Amarillo */
+    --disk-4: #43A047; /* Verde */
+    --disk-5: #1E88E5; /* Azul */
+    --disk-6: #8E24AA; /* Morado */
+    --disk-7: #E91E63; /* Rosa */
+}
+
+/* Fondo con textura de madera/pergamino oscuro */
+.hanoi-body {
+    background-color: var(--hanoi-bg);
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(139, 90, 43, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(255, 210, 0, 0.07) 0%, transparent 50%),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 80px,
+            rgba(255, 210, 0, 0.015) 80px,
+            rgba(255, 210, 0, 0.015) 81px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 80px,
+            rgba(255, 210, 0, 0.015) 80px,
+            rgba(255, 210, 0, 0.015) 81px
+        );
+    color: var(--hanoi-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+/* Nav */
+.top-nav {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 110;
+}
+
+.top-nav .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--hanoi-gold) !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background-color: rgba(255, 210, 0, 0.08) !important;
+    border: 2px solid rgba(255, 210, 0, 0.4) !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.top-nav .btn-back:hover {
+    background-color: rgba(255, 210, 0, 0.15) !important;
+    border-color: var(--hanoi-gold) !important;
+    transform: translateY(-2px);
+}
+
+/* Superficie principal */
+.hanoi-surface {
+    background: linear-gradient(160deg, #2a1f3d 0%, #1d1528 60%, #150f1e 100%);
+    border: 2px solid var(--hanoi-border);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.7),
+        0 0 40px rgba(255, 210, 0, 0.05),
+        inset 0 1px 0 rgba(255, 210, 0, 0.1);
+    width: 95%;
+    max-width: 980px;
+    padding: 2rem 2rem 2.5rem;
+    border-radius: 2.5rem;
+    margin: 6rem auto 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoración de esquinas */
+.hanoi-surface::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--hanoi-gold), transparent);
+    opacity: 0.6;
+}
+
+/* Header */
+.hanoi-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.hanoi-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: var(--hanoi-gold);
+    text-shadow:
+        0 0 30px rgba(255, 210, 0, 0.5),
+        0 2px 4px rgba(0,0,0,0.8);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.4rem;
+}
+
+.hanoi-subtitle {
+    font-size: 1rem;
+    color: var(--hanoi-text-muted);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+/* Stats Bar */
+.stats-bar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--hanoi-text-muted);
+    transition: all 0.3s;
+}
+
+.stat-chip .material-symbols-outlined {
+    font-size: 1.1rem;
+    font-variation-settings: 'FILL' 1;
+}
+
+.stat-chip.highlight {
+    background: rgba(255, 210, 0, 0.12);
+    border-color: rgba(255, 210, 0, 0.3);
+    color: var(--hanoi-gold);
+}
+
+/* ===== ÁREA DE JUEGO ===== */
+.hanoi-game-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    margin-bottom: 2rem;
+    padding: 1rem 0.5rem 0;
+    position: relative;
+    min-height: 280px;
+}
+
+/* Plataforma base */
+.hanoi-game-area::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    right: 5%;
+    height: 14px;
+    background: linear-gradient(180deg, var(--hanoi-pole) 0%, var(--hanoi-pole-dark) 100%);
+    border-radius: 8px;
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.6),
+        0 -1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Torre individual */
+.tower {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    padding-bottom: 14px; /* altura de la base */
+    cursor: pointer;
+    min-height: 280px;
+    transition: background 0.2s;
+    border-radius: 1rem;
+}
+
+.tower::before {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -2.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--hanoi-text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Poste vertical */
+.tower-pole {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    background: linear-gradient(90deg, var(--hanoi-pole-dark), var(--hanoi-pole), var(--hanoi-pole-dark));
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: height 0.3s ease;
+    z-index: 1;
+}
+
+/* Stack de discos */
+.disk-stack {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Disco */
+.disk {
+    border-radius: 6px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.85);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    position: relative;
+    transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: grab;
+    user-select: none;
+    margin-bottom: 3px;
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        inset 0 -2px 0 rgba(0,0,0,0.2);
+}
+
+.disk:last-child {
+    margin-bottom: 0;
+}
+
+/* Estados del disco */
+.disk.selected {
+    transform: translateY(-120px) scale(1.08);
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.6),
+        0 0 30px var(--hanoi-gold-glow),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    z-index: 10;
+    cursor: grabbing;
+}
+
+.disk.animating {
+    transition: none;
+}
+
+/* Hover en la torre cuando hay un disco seleccionado */
+.tower.drop-target {
+    background: rgba(255, 210, 0, 0.06);
+}
+
+.tower.drop-target .tower-pole {
+    box-shadow: 0 0 20px rgba(255, 210, 0, 0.4);
+}
+
+.tower.invalid-target {
+    background: rgba(229, 57, 53, 0.06);
+}
+
+/* Colores por tamaño de disco (1 = más grande, 7 = más pequeño) */
+.disk[data-size="1"] { background: linear-gradient(180deg, #EF5350, #B71C1C); border: 2px solid #EF9A9A; }
+.disk[data-size="2"] { background: linear-gradient(180deg, #FFA726, #E65100); border: 2px solid #FFCC80; }
+.disk[data-size="3"] { background: linear-gradient(180deg, #FFEE58, #F57F17); border: 2px solid #FFF9C4; }
+.disk[data-size="4"] { background: linear-gradient(180deg, #66BB6A, #1B5E20); border: 2px solid #A5D6A7; }
+.disk[data-size="5"] { background: linear-gradient(180deg, #42A5F5, #0D47A1); border: 2px solid #90CAF9; }
+.disk[data-size="6"] { background: linear-gradient(180deg, #AB47BC, #4A148C); border: 2px solid #CE93D8; }
+.disk[data-size="7"] { background: linear-gradient(180deg, #EC407A, #880E4F); border: 2px solid #F48FB1; }
+
+/* ===== BOTONES ===== */
+.hanoi-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+}
+
+.hanoi-btn-primary {
+    background: linear-gradient(135deg, var(--hanoi-gold), var(--hanoi-gold-dark));
+    color: #1a1000;
+    border: none;
+    font-weight: 800;
+    padding: 0.9rem 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 2rem;
+    box-shadow: 0 8px 25px rgba(255, 210, 0, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-family: 'Lexend', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hanoi-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 210, 0, 0.5);
+}
+
+.hanoi-btn-success {
+    background: linear-gradient(135deg, var(--accent-green, #00D084), #00a868);
+    color: white;
+    border: none;
+    font-weight: 800;
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 208, 132, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-family: 'Lexend', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hanoi-btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0, 208, 132, 0.5);
+}
+
+.hanoi-btn-outline {
+    background: transparent;
+    border: 2px solid rgba(255, 210, 0, 0.4);
+    color: var(--hanoi-gold);
+    font-weight: 700;
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-family: 'Lexend', sans-serif;
+    transition: all 0.2s;
+}
+
+.hanoi-btn-outline:hover {
+    background: rgba(255, 210, 0, 0.1);
+    border-color: var(--hanoi-gold);
+    transform: translateY(-2px);
+}
+
+/* ===== WIN OVERLAY ===== */
+.win-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 10, 25, 0.88);
+    backdrop-filter: blur(8px);
+    border-radius: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.win-card {
+    background: linear-gradient(160deg, #2d2040 0%, #1d1528 100%);
+    border: 2px solid rgba(255, 210, 0, 0.4);
+    border-radius: 2rem;
+    padding: 3rem 3.5rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.7), 0 0 50px rgba(255, 210, 0, 0.1);
+    max-width: 380px;
+    width: 90%;
+    position: relative;
+}
+
+.win-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--hanoi-text-muted);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.win-close-btn:hover {
+    background: rgba(255,255,255,0.15);
+    color: var(--hanoi-text);
+    transform: scale(1.1);
+}
+
+.win-close-btn .material-symbols-outlined {
+    font-size: 1.2rem;
+}
+
+.win-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.win-actions .btn {
+    width: 100%;
+    justify-content: center;
+}
+
+.win-card .material-symbols-outlined {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes pop {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.win-card h2 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--hanoi-gold);
+    margin-bottom: 0.5rem;
+}
+
+.win-card p {
+    color: var(--hanoi-text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.win-stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+/* Badges de nivel */
+.level-badge {
+    display: inline-block;
+    background: rgba(255, 210, 0, 0.15);
+    border: 1px solid rgba(255, 210, 0, 0.35);
+    color: var(--hanoi-gold);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.3rem 0.8rem;
+    border-radius: 1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+}
+
+/* Efecto de shake cuando el movimiento es inválido */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+.tower.shake {
+    animation: shake 0.35s ease;
+}
+
+/* ===== UTILIDADES ===== */
+.hidden { display: none !important; }
+
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .hanoi-surface {
+        padding: 1.5rem 1rem 2rem;
+        margin-top: 5rem;
+        border-radius: 1.8rem;
+    }
+
+    .hanoi-game-area {
+        min-height: 200px;
+        gap: 0;
+    }
+
+    .disk {
+        height: 22px;
+        font-size: 0.6rem;
+    }
+
+    .disk.selected {
+        transform: translateY(-90px) scale(1.06);
+    }
+
+    .tower::before {
+        font-size: 0.65rem;
+        bottom: -2rem;
+    }
+
+    .stats-bar {
+        gap: 0.5rem;
+    }
+
+    .stat-chip {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .win-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .tower::before {
+        display: none;
+    }
+}

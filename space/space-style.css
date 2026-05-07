@@ -1,0 +1,271 @@
+/* --- Variables Espaciales Renovadas --- */
+:root {
+    --space-black: #000000;
+    --space-dark: #07000e;
+    --space-purple-diffuse: #1e053a;
+    
+    --space-neon-purple: #c879ff; 
+    --space-neon-blue: #00eaff;
+    --text-white: #ffffff;
+    --text-subtitle: #e2ccff;
+    
+    --card-back-grad-1: #6600ff;
+    --card-back-grad-2: #ff00ff;
+}
+
+/* Fondo principal con estrellas y difuminado */
+.space-body {
+    background-color: var(--space-black);
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+        radial-gradient(#ffffcc, rgba(255,255,204,.1) 1px, transparent 2px),
+        radial-gradient(circle at top right, var(--space-purple-diffuse) 0%, transparent 60%);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 100% 100%;
+    background-position: 0 0, 40px 60px, 130px 270px, 0 0;
+    
+    color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    position: relative;
+    padding: 1rem;
+}
+
+/* --- Navegación Superior --- */
+.top-nav {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 110;
+}
+
+.top-nav .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: white !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background-color: rgba(255,255,255,0.1) !important;
+    border: 2px solid white !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.top-nav .btn-back:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+    transform: translateY(-2px);
+}
+
+/* --- Tarjeta Principal --- */
+.space-surface {
+    background-color: rgba(11, 2, 21, 0.75);
+    backdrop-filter: blur(12px);
+    border: 3px solid rgba(200, 121, 255, 0.4);
+    box-shadow: 0px 20px 70px 0px rgba(0, 0, 0, 0.8), 0 0 30px rgba(200, 121, 255, 0.2);
+    color: var(--text-white);
+    
+    width: 95%; 
+    max-width: 900px;
+    padding: 2rem;
+    border-radius: 2.5rem;
+    margin: 6rem auto 2rem;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Textos */
+.text-glow, #game-title {
+    color: #fff !important;
+    text-shadow: 0 0 15px var(--space-neon-purple);
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.text-light, #status-text {
+    color: var(--text-subtitle) !important;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+/* --- Setup Area / Selección de Dificultad MEJORADA --- */
+.game-setup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+
+    /* Panel de fondo semitransparente que integra los botones con el entorno */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(200, 121, 255, 0.25);
+    border-radius: 1.5rem;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    max-width: 480px;
+}
+
+/* Label de dificultad visible */
+.game-setup .filter-label {
+    color: rgba(226, 204, 255, 0.85) !important;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+/* Botones de dificultad con mejor contraste */
+.difficulty-filter {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(226, 204, 255, 0.9) !important;
+    border: 1.5px solid rgba(200, 121, 255, 0.35) !important;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    transition: all 0.25s ease;
+}
+
+.difficulty-filter:hover {
+    background: rgba(200, 121, 255, 0.18) !important;
+    color: #ffffff !important;
+    border-color: rgba(200, 121, 255, 0.65) !important;
+    transform: translateY(-1px);
+}
+
+/* Activo: neon destacado pero no sobreexpuesto */
+.active-neon {
+    background: linear-gradient(135deg, rgba(200, 121, 255, 0.55), rgba(0, 234, 255, 0.35)) !important;
+    color: white !important;
+    border: 1.5px solid var(--space-neon-purple) !important;
+    box-shadow: 0 0 12px rgba(200, 121, 255, 0.5), inset 0 0 8px rgba(200, 121, 255, 0.15) !important;
+}
+
+.btn-space {
+    background: linear-gradient(135deg, var(--space-neon-purple), var(--space-neon-blue));
+    color: white;
+    border: none;
+    box-shadow: 0 5px 20px rgba(0, 234, 255, 0.4);
+}
+
+.btn-space-outline {
+    background: transparent !important;
+    border: 3px solid var(--space-neon-purple) !important;
+    color: white !important;
+}
+
+/* --- El Tablero de Cartas (Grid Dinámico) --- */
+.cards-grid {
+    display: grid !important; 
+    gap: 0.75rem; 
+    margin: 0 auto 2.5rem;
+    perspective: 1000px;
+    width: 100%;
+    max-width: 700px;
+    justify-content: center;
+}
+
+.cards-grid.facil   { grid-template-columns: repeat(4, 1fr) !important; }
+.cards-grid.medio   { grid-template-columns: repeat(4, 1fr) !important; }
+.cards-grid.dificil { grid-template-columns: repeat(4, 1fr) !important; }
+
+@media (min-width: 768px) {
+    .cards-grid.dificil { grid-template-columns: repeat(8, 1fr) !important; }
+}
+
+/* --- La Carta 3D --- */
+.card {
+    width: 100% !important; 
+    height: auto !important; 
+    aspect-ratio: 1 / 1 !important;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.card.flipped { transform: rotateY(180deg); }
+.card.matched { transform: rotateY(180deg) scale(1.05); }
+
+.card.matched .card-front {
+    box-shadow: 0 0 25px var(--space-neon-blue);
+    border-color: var(--space-neon-blue);
+}
+
+/* Caras de la carta */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    overflow: hidden;
+}
+
+/* Parte trasera de la carta — con back_card.png */
+.card-back {
+    /* Fondo gris oscuro-azulado para que back_card.png (sin fondo) se integre bien */
+    background: radial-gradient(circle at center, #2a2340 0%, #1a1528 60%, #0f0e1a 100%);
+    border: 2px solid rgba(200, 121, 255, 0.4);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.5);
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.card:hover .card-back {
+    border-color: rgba(200, 121, 255, 0.8);
+    box-shadow: inset 0 0 15px rgba(200, 121, 255, 0.15), 0 0 20px rgba(200, 121, 255, 0.3);
+}
+
+/* Imagen del reverso */
+.back-img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px rgba(200, 121, 255, 0.6));
+}
+
+/* Hide back card completely when card is showing front (flipped) */
+.card.flipped .card-back {
+    opacity: 0;
+}
+
+/* Parte delantera — fondo gris neutro para planetas sin fondo */
+.card-front {
+    /* Gris oscuro azulado suave que no distrae del planeta */
+    background: radial-gradient(circle at center, #2d2d3a 0%, #1e1e28 60%, #141420 100%);
+    border: 2px solid var(--space-neon-blue);
+    transform: rotateY(180deg);
+}
+
+/* Imagen del planeta */
+.planet-img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(0, 234, 255, 0.5));
+    transition: filter 0.3s;
+}
+
+.card.matched .planet-img {
+    filter: drop-shadow(0 0 14px rgba(0, 234, 255, 0.9));
+}
+
+/* Utilidades */
+.hidden { display: none !important; }
+.post-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; width: 100%; }
