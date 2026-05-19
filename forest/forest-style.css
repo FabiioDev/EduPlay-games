@@ -1,112 +1,433 @@
-/* Hereda fuentes y base de tu style.css */
+/* ===== EL BOSQUE DE LOS SONIDOS — ESTILOS ===== */
 
-.game-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: var(--bg-color); /* #f5f7f9 del root */
-  margin: 0;
-  overflow: hidden;
-  position: relative;
+/* Paleta del Bosque */
+:root {
+    --forest-bg: #f0faf0;
+    --forest-surface: #ffffff;
+    --forest-border: rgba(56, 180, 80, 0.25);
+    --forest-green: #2ecc71;
+    --forest-green-dark: #1a9a50;
+    --forest-green-glow: rgba(46, 204, 113, 0.3);
+    --forest-amber: #f0a500;
+    --forest-amber-dark: #c07c00;
+    --forest-teal: #00bfa5;
+    --forest-text: #1a3a20;
+    --forest-text-muted: #5a7a5e;
+    --forest-pole: #8B6914;
+
+    /* Colores de los pads */
+    --pad-amber:  #ffb74d;
+    --pad-green:  #81c784;
+    --pad-blue:   #64b5f6;
+    --pad-purple: #ba68c8;
 }
 
-/* UI de Navegación */
+/* --- Fondo con textura orgánica de bosque --- */
+.game-body {
+    background-color: var(--forest-bg);
+    background-image:
+        radial-gradient(ellipse at 15% 85%, rgba(46, 204, 113, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(240, 165, 0, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(0, 191, 165, 0.06) 0%, transparent 70%),
+        repeating-linear-gradient(
+            60deg,
+            transparent,
+            transparent 120px,
+            rgba(46, 204, 113, 0.03) 120px,
+            rgba(46, 204, 113, 0.03) 121px
+        );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Hojas decorativas de fondo */
+.game-body::before,
+.game-body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50% 0 50% 0;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+.game-body::before {
+    width: 300px;
+    height: 300px;
+    background: var(--forest-green);
+    top: -80px;
+    left: -80px;
+    transform: rotate(-15deg);
+}
+
+.game-body::after {
+    width: 250px;
+    height: 250px;
+    background: var(--forest-amber);
+    bottom: -60px;
+    right: -60px;
+    transform: rotate(30deg);
+}
+
+/* --- Navegación superior --- */
 .top-nav {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  z-index: 100;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 110;
 }
 
 .btn-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: var(--primary-blue);
-  font-weight: 700;
-  background-color: #ffffff;
-  padding: 0.8rem 1.5rem;
-  border-radius: 2rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--forest-green-dark);
+    font-weight: 700;
+    font-size: 0.9rem;
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 2px solid rgba(46, 204, 113, 0.4);
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.15);
+    transition: transform 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(8px);
 }
 
 .btn-back:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    background-color: rgba(46, 204, 113, 0.12);
+    border-color: var(--forest-green);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.25);
 }
 
-/* Mejora de Contraste en la Tarjeta Principal */
+/* --- Tarjeta principal --- */
 .game-surface {
-  background-color: #ffffff; /* Blanco puro para separar del fondo gris */
-  border: 4px solid var(--surface-light); /* Borde sutil */
-  border-radius: 3rem;
-  padding: 3rem;
-  box-shadow: 0px 20px 60px 0px rgba(44, 47, 49, 0.08); /* Sombra más pronunciada */
-  text-align: center;
-  max-width: 600px;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 10;
+    background: linear-gradient(160deg, #ffffff 0%, #f7fdf8 60%, #f0faf0 100%);
+    border: 2px solid var(--forest-border);
+    box-shadow:
+        0 30px 80px rgba(26, 154, 80, 0.12),
+        0 8px 25px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-radius: 2.5rem;
+    padding: 2.5rem 3rem;
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+    position: relative;
+    margin: 5rem auto 2rem;
 }
 
-.display-lg { font-size: 3rem; font-weight: 800; color: var(--primary-blue); line-height: 1.1; margin-bottom: 0.5rem;}
-.headline-md { font-size: 1.5rem; font-weight: 600; color: var(--text-main); margin-bottom: 2rem;}
+/* Línea decorativa superior */
+.game-surface::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--forest-green), var(--forest-amber), transparent);
+    border-radius: 2.5rem 2.5rem 0 0;
+    opacity: 0.8;
+}
 
+/* --- Header / Título --- */
+.forest-header {
+    margin-bottom: 1.5rem;
+}
+
+.display-lg {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: var(--forest-text);
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.5px;
+}
+
+.display-lg span {
+    color: var(--forest-green-dark);
+}
+
+.headline-md {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--forest-text-muted);
+    transition: color 0.3s;
+}
+
+/* --- Stats Bar (Nivel y puntos) --- */
+.forest-stats {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(46, 204, 113, 0.08);
+    border: 1px solid rgba(46, 204, 113, 0.25);
+    padding: 0.45rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--forest-text-muted);
+    transition: all 0.3s;
+}
+
+.stat-chip .material-symbols-outlined {
+    font-size: 1rem;
+    font-variation-settings: 'FILL' 1;
+    color: var(--forest-green);
+}
+
+.stat-chip.highlight {
+    background: rgba(46, 204, 113, 0.15);
+    border-color: rgba(46, 204, 113, 0.4);
+    color: var(--forest-green-dark);
+}
+
+/* --- Área de Setup / Dificultad --- */
 .game-setup {
-  margin-bottom: 2rem;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+    background: rgba(46, 204, 113, 0.06);
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    border-radius: 1.5rem;
+    padding: 1rem 1.5rem;
+    width: 100%;
 }
 
+.game-setup .filter-label {
+    color: var(--forest-text-muted);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.15rem;
+}
+
+.difficulty-filter {
+    background: rgba(255, 255, 255, 0.8) !important;
+    color: var(--forest-text-muted) !important;
+    border: 1.5px solid rgba(46, 204, 113, 0.3) !important;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.difficulty-filter:hover {
+    background: rgba(46, 204, 113, 0.12) !important;
+    color: var(--forest-green-dark) !important;
+    border-color: var(--forest-green) !important;
+    transform: translateY(-1px);
+}
+
+.active-gold {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(0, 191, 165, 0.15)) !important;
+    color: var(--forest-green-dark) !important;
+    border: 1.5px solid var(--forest-green) !important;
+    box-shadow: 0 0 12px rgba(46, 204, 113, 0.3) !important;
+}
+
+/* --- Grid de Animales --- */
 .animal-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Clase de utilidad para ocultar elementos fluidamente */
-.hidden {
-  display: none !important;
-}
-
+/* --- Pads de animales --- */
 .animal-pad {
-  background-color: var(--pad-color);
-  border: none;
-  border-radius: 9999px; 
-  width: 120px;
-  height: 120px;
-  font-size: 4.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
-  opacity: 0.8;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none; /* Evita que se seleccione el texto (emoji) por accidente */
+    background-color: var(--pad-color);
+    border: none;
+    border-radius: 9999px;
+    width: 110px;
+    height: 110px;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow:
+        0px 8px 20px rgba(0,0,0,0.1),
+        0px 3px 8px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, filter 0.2s ease;
+    opacity: 0.85;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    position: relative;
 }
 
-.animal-pad:nth-child(odd) { transform: rotate(-3deg); }
+.animal-pad::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,0.12);
+}
+
+.animal-pad:nth-child(odd)  { transform: rotate(-3deg); }
 .animal-pad:nth-child(even) { transform: rotate(3deg); }
 
-.animal-pad.active {
-  transform: scale(1.15) rotate(0deg);
-  filter: brightness(1.3);
-  opacity: 1;
-  box-shadow: 0px 20px 40px 0px rgba(44, 47, 49, 0.2);
+.animal-pad:hover {
+    opacity: 1;
+    filter: brightness(1.08);
 }
 
-.title-lg { font-size: 1.3rem; padding: 1rem 2.5rem; min-height: 56px; border-radius: 3rem;}
+.animal-pad.active {
+    transform: scale(1.18) rotate(0deg) !important;
+    filter: brightness(1.25);
+    opacity: 1;
+    box-shadow:
+        0px 18px 35px rgba(0, 0, 0, 0.2),
+        0 0 0 4px rgba(255, 255, 255, 0.8),
+        0 0 25px rgba(46, 204, 113, 0.4);
+}
 
+/* --- Utilidades --- */
+.hidden {
+    display: none !important;
+}
+
+/* --- Controles / Botones --- */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.title-lg {
+    font-size: 1.1rem;
+    padding: 0.9rem 2.5rem;
+    min-height: 52px;
+    border-radius: 3rem;
+}
+
+/* Botón principal verde bosque */
+#start-btn {
+    background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark));
+    color: white;
+    border: none;
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(46, 204, 113, 0.55);
+}
+
+/* Botón de continuar/reintentar */
+#continue-btn {
+    background: linear-gradient(135deg, var(--forest-green), var(--forest-green-dark));
+    color: white;
+    border: none;
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.35);
+}
+
+#restart-menu-btn {
+    background: transparent;
+    border: 2px solid rgba(46, 204, 113, 0.4) !important;
+    color: var(--forest-green-dark) !important;
+    box-shadow: none;
+}
+
+#restart-menu-btn:hover {
+    background: rgba(46, 204, 113, 0.08);
+    border-color: var(--forest-green) !important;
+}
+
+/* --- Post level actions --- */
+#post-level-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* --- Panel de resultado (win/lose) --- */
+.result-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(10px);
+    border-radius: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* --- Shake de error --- */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+.shake {
+    animation: shake 0.35s ease;
+}
+
+/* --- Indicador de secuencia (nivel) --- */
+.level-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(46, 204, 113, 0.12);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    color: var(--forest-green-dark);
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 0.35rem 0.9rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+/* --- Responsive --- */
 @media (max-width: 600px) {
-  .top-nav { top: 1rem; left: 1rem; }
-  .btn-back { padding: 0.5rem 1rem; font-size: 0.9rem; }
-  .game-surface { padding: 2rem; margin-top: 3rem; }
-  .animal-pad { width: 90px; height: 90px; font-size: 3.5rem; }
+    .top-nav { top: 0.75rem; left: 0.75rem; }
+    .btn-back { padding: 0.5rem 1rem; font-size: 0.85rem; }
+
+    .game-surface {
+        padding: 2rem 1.5rem;
+        margin-top: 5rem;
+        border-radius: 2rem;
+        width: 95%;
+    }
+
+    .animal-pad { width: 85px; height: 85px; font-size: 3rem; }
+    .animal-grid { gap: 1.2rem; }
+
+    .forest-stats { gap: 0.5rem; }
+    .stat-chip { font-size: 0.78rem; padding: 0.35rem 0.75rem; }
 }

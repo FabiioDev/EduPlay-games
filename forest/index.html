@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Bosque de los Sonidos - EduPlay</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -23,29 +23,42 @@
     </nav>
 
     <main class="game-surface">
-      <header>
-        <h1 class="display-lg">Bosque de Sonidos</h1>
-        <p class="headline-md instruction-text" id="status-text">
-          Elige tu nivel para comenzar
-        </p>
+      <!-- Header -->
+      <header class="forest-header">
+        <h1 class="display-lg">🌿 Bosque de<br /><span>Sonidos</span></h1>
+        <p class="headline-md" id="status-text">Elige tu nivel para comenzar</p>
       </header>
 
+      <!-- Stats Bar (oculto hasta que empieza el juego) -->
+      <div class="forest-stats hidden" id="stats-bar">
+        <div class="stat-chip highlight" id="chip-round">
+          <span class="material-symbols-outlined">music_note</span>
+          <span>Ronda <span id="round-display">1</span></span>
+        </div>
+        <div class="stat-chip" id="chip-seq">
+          <span class="material-symbols-outlined">queue_music</span>
+          <span>Secuencia: <span id="seq-display">0</span></span>
+        </div>
+      </div>
+
+      <!-- Setup de dificultad -->
       <div class="filters-container game-setup" id="setup-area">
         <span class="filter-label">Dificultad:</span>
         <button
           class="filter-btn difficulty-filter active-gold"
           data-diff="facil"
         >
-          Fácil
+          🌱 Fácil
         </button>
         <button class="filter-btn difficulty-filter" data-diff="medio">
-          Medio
+          🌳 Medio
         </button>
         <button class="filter-btn difficulty-filter" data-diff="dificil">
-          Difícil
+          🌲 Difícil
         </button>
       </div>
 
+      <!-- Tablero de animales -->
       <div class="animal-grid hidden" id="game-board">
         <button
           class="animal-pad"
@@ -69,33 +82,24 @@
         ></button>
       </div>
 
+      <!-- Controles -->
       <div class="controls">
         <button id="start-btn" class="btn btn-primary title-lg">
+          <span class="material-symbols-outlined">play_arrow</span>
           ¡Empezar Juego!
         </button>
 
-        <div
-          id="post-level-actions"
-          class="hidden"
-          style="
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-          "
-        >
+        <div id="post-level-actions" class="hidden">
           <button
             id="continue-btn"
             class="btn btn-success title-lg"
             style="margin-bottom: 0"
           >
-            Continuar
+            <span class="material-symbols-outlined">refresh</span>
+            Reintentar Ronda
           </button>
-          <button
-            id="restart-menu-btn"
-            class="btn filter-btn title-lg"
-            style="background: var(--surface-border)"
-          >
+          <button id="restart-menu-btn" class="btn filter-btn title-lg">
+            <span class="material-symbols-outlined">tune</span>
             Cambiar Dificultad
           </button>
         </div>
@@ -103,5 +107,37 @@
     </main>
 
     <script src="game.js"></script>
+    <script>
+      /* Mini-script para actualizar stats en tiempo real sin tocar game.js */
+      (function () {
+        const _origNextRound = window.__patchNextRound;
+        let round = 0;
+        const seqDisplay = document.getElementById("seq-display");
+        const roundDisplay = document.getElementById("round-display");
+        const statsBar = document.getElementById("stats-bar");
+
+        /* Observamos cambios al status-text para actualizar ronda/secuencia */
+        const observer = new MutationObserver(() => {
+          /* Si el juego está corriendo y hay secuencia, la leemos del DOM/contexto */
+        });
+
+        /* Exponemos helpers que game.js puede llamar opcionalmente */
+        window.forestUI = {
+          showStats() {
+            statsBar.classList.remove("hidden");
+          },
+          hideStats() {
+            statsBar.classList.add("hidden");
+          },
+          setRound(n) {
+            round = n;
+            if (roundDisplay) roundDisplay.textContent = n;
+          },
+          setSeqLen(n) {
+            if (seqDisplay) seqDisplay.textContent = n;
+          },
+        };
+      })();
+    </script>
   </body>
 </html>

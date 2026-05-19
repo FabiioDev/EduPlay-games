@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let isPlayerTurn = false;
   let currentDifficulty = 'facil';
   let turnStartTime = 0;
+  let currentRound = 0;
   
   let config = {
     playbackSpeed: 600, 
@@ -25,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const baseFrequencies = [329.63, 261.63, 220.00, 392.00];
+
+  // --- Helper UI extendida ---
+  const ui = window.forestUI || { showStats(){}, hideStats(){}, setRound(){}, setSeqLen(){} };
 
   // --- 1. Lógica de UI ---
   difficultyBtns.forEach(btn => {
@@ -36,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function randomizeBoard() {
-    const shuffled = animalPool.sort(() => 0.5 - Math.random()).slice(0, 4);
+    const shuffled = [...animalPool].sort(() => 0.5 - Math.random()).slice(0, 4);
     pads.forEach((pad, index) => {
       pad.textContent = shuffled[index];
     });
@@ -89,21 +93,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 3. Flujo del Juego ---
   async function playMachineSequence() {
     isPlayerTurn = false;
-    statusText.textContent = "¡Escucha y observa!";
-    statusText.style.color = "var(--text-main)";
+    statusText.textContent = "¡Escucha y observa! 👀";
+    statusText.style.color = "var(--forest-text-muted)";
     
     for (let i = 0; i < gameSequence.length; i++) {
       await animatePad(gameSequence[i]);
     }
     
     isPlayerTurn = true;
-    statusText.textContent = "¡Es tu turno!";
+    statusText.textContent = "¡Es tu turno! 🎯";
+    statusText.style.color = "var(--forest-green-dark)";
     turnStartTime = Date.now(); 
   }
 
   function nextRound() {
     playerSequence = [];
     gameSequence.push(Math.floor(Math.random() * 4));
+    currentRound++;
+    ui.setRound(currentRound);
+    ui.setSeqLen(gameSequence.length);
     setTimeout(playMachineSequence, 800);
   }
 
@@ -143,10 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
       statusText.style.color = "var(--accent-red)";
       isPlayerTurn = false;
       
-      // Solo mostramos los botones SI PIERDE
       postLevelActions.classList.remove('hidden');
-      continueBtn.classList.remove('hidden');
-      continueBtn.textContent = "Reintentar Ronda"; // Cambiamos texto
+      continueBtn.innerHTML = '<span class="material-symbols-outlined">refresh</span> Reintentar Ronda';
       return;
     }
 
@@ -154,11 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (playerSequence.length === gameSequence.length) {
       isPlayerTurn = false;
       statusText.textContent = "¡Súper bien! 🎉";
-      statusText.style.color = "var(--accent-green-dark)";
+      statusText.style.color = "var(--forest-green-dark)";
       
-      evaluatePerformance(); 
+      evaluatePerformance();
+      ui.setSeqLen(gameSequence.length + 1);
       
-      // EL CAMBIO MAGISTRAL: Esperamos 1 segundo para que vea el mensaje y lanzamos la siguiente ronda solos
       setTimeout(() => {
         nextRound();
       }, 1000);
@@ -174,17 +180,18 @@ document.addEventListener('DOMContentLoaded', () => {
     setupArea.classList.add('hidden');
     startBtn.classList.add('hidden');
     gameBoard.classList.remove('hidden');
+    ui.showStats();
     
+    currentRound = 0;
     randomizeBoard();
     setupDifficultyConfig();
     nextRound();
   });
 
-  // Botón de Reintentar (Si se equivocó)
+  // Botón de Reintentar
   continueBtn.addEventListener('click', () => {
     postLevelActions.classList.add('hidden');
-    playerSequence = []; // Reseteamos sus toques
-    // Repetimos la secuencia de la máquina sin agregarle una nota nueva
+    playerSequence = [];
     setTimeout(playMachineSequence, 500);
   });
 
@@ -194,9 +201,11 @@ document.addEventListener('DOMContentLoaded', () => {
     gameBoard.classList.add('hidden');
     setupArea.classList.remove('hidden');
     startBtn.classList.remove('hidden');
+    ui.hideStats();
     
     statusText.textContent = "Elige tu nivel para comenzar";
-    statusText.style.color = "var(--text-main)";
+    statusText.style.color = "var(--forest-text-muted)";
     gameSequence = [];
+    currentRound = 0;
   });
 });
